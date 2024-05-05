@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="product_form.css">
+    <script src="product_form_validation.js"></script>
+    <script src="../utils/validation.js"></script>
+    <script src="../utils/my_local_storage.js"></script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <header>
+            <img src="../assets/erp_logo.jpeg" width="100" height="100" class="center">
+        </header>
+        <a class="active" href="#">Dashboard</a>
+        <a href="../login/login.html">Login</a>
+        <a href="../sign_up/sign_up.html">SignUp</a>
+        <a href="#" class="add">Add Product</a>
+
+    </div>
+    <div id="div1">
+        <table id="tabledata">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Product Price</th>
+                    <th>Product Brand</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tablebody">
+            </tbody>
+
+        </table>
+
+    </div>
+    <div id="wrapper">
+        <div class="form">
+            <span class="close">&times;</span>
+            <div class="title">
+                <h1>PRODUCT FORM</h1>
+            </div>
+            <div class="product_form">
+                <div class="row">
+                    <input id="productname" type="text" placeholder="Product Name"><br>
+                </div>
+                <div class="row">
+                    <input id="productprice" type="number" placeholder="Product Price"><br>
+                </div>
+                <div class="row">
+                    <input id="productbrand" type="text" placeholder="Product brand"><br>
+                </div>
+                <div class="row">
+                    <button id="save">SAVE</button>
+                    <button id="update">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

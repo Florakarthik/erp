@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="sign_up.css">
+    <script src="sign_up_validation.js"></script>
+    <script src="../utils/validation.js"></script>
+    <script src="../utils/my_local_storage.js"></script>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <div class="image">
+            <img src="../assets/erp_logo.jpeg" width="100" height="100" class="center">
+        </div>
+        <div class="form">
+
+            <div class="title">
+                <h1><b>Sign Up Form</b></h1>
+            </div>
+            <div class="login_form">
+                <div class="row">
+                    <i class="fa fa-user-circle-o"></i>
+                    <input id="userName" type="text" placeholder="Username"><br>
+                </div>
+                <div class="row">
+                    <i class="fa fa-envelope-o"></i>
+                    <input id="email" type="text" placeholder="Email Id"><br>
+                </div>
+                <div class="row">
+                    <i id="lock" class="fa fa-lock"></i>
+                    <input id="password" type="password" placeholder="Password"><br>
+                </div>
+                <div class="row">
+                    <button id="signUp">SIGN UP</button><br>
+                    <button id="log_in">LOGIN</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
