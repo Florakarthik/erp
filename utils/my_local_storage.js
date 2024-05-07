@@ -165,9 +165,10 @@ function displayProductDetails() {
             if (!isAlreadyExist) {
                 productDetails[index] = { name: newProductName, price: newProductPrice, brand: newProductBrand };
                 localStorage.setItem('productDetails', JSON.stringify(productDetails));
-                location.reload();
+                //location.reload();
             } else {
                 showToast("Product already exist");
+                $("#wrapper").hide();
             }
         }
 

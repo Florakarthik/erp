@@ -9,7 +9,8 @@ $(document).ready(function () {
         $("#wrapper").hide();
       });
     $("#save").click(function() {
-        $("#update").hide();
+        //$("#update").hide();
+        $("#wrapper").hide();
         let productName = $("#productname").val();
         //console.log(productName);
         let productPrice = $("#productprice").val();
