@@ -156,7 +156,7 @@ function displayProductDetails() {
             let productDetails = JSON.parse(localStorage.getItem('productDetails')) || [];
 
             let isAlreadyExist = false;
-            for (let productInfo of productArray) {
+            for (let productInfo of productDetails) {
                 if (productInfo.name == newProductName && productInfo.brand == newProductBrand) {
                     isAlreadyExist = true;
                 }
