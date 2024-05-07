@@ -10,16 +10,15 @@ $(document).ready(function () {
             if (validatePassword(password)) {
                 let userInformation = getUserDetails(userData);
                 console.log(userInformation);
-                if (userInformation != null &&userInformation.username!=null) {
+                if (userInformation != null && userInformation.username != null) {
                     alert("Welcome " + userInformation.username);
                     window.location.href = "../product_form/product_form.html";
                 }
-                else if(userInformation == "Please enter the correct password"){
+                else if (userInformation == "Please enter the correct password") {
                     showToast("Please enter the correct password");
                 }
                 else {
                     showToast("No user found. Please sign up first.");
-                    return;
                 }
             } else {
                 showToast("Password length should be 8 with special character and numbers");

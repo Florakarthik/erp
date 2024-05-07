@@ -42,11 +42,11 @@ function getUserDetails(user) {
                 console.log("if inside if condition");
                 return userInfo;
             }
-            else if(userInfo.email == user.email && userInfo.password != user.password){
+            else if (userInfo.email == user.email && userInfo.password != user.password) {
                 console.log("if inside elseif condition");
                 return "Please enter the correct password";
             }
-           
+
         }
         console.log("if returning null");
         return null;
@@ -64,20 +64,20 @@ function saveProductDetails(product) {
         return true;
     } else {
         productArray = JSON.parse(storedProductDetails);
+        let isAlreadyExist = false;
         for (let productInfo of productArray) {
-            console.log(product.name);
-            if (productInfo.name == product.name && productInfo.brand != product.brand || 
-                productInfo.name != product.name && productInfo.brand != product.brand) {
-                productArray.push(product);
-                let productDetailString = JSON.stringify(productArray);
-                localStorage.setItem('productDetails', productDetailString);
-                return true;
+            if (productInfo.name == product.name && productInfo.brand == product.brand) {
+                isAlreadyExist = true;
+            }
 
-            }
-          else {
-               return false;
-            }
         }
+        if (!isAlreadyExist) {
+            productArray.push(product);
+            let productDetailString = JSON.stringify(productArray);
+            localStorage.setItem('productDetails', productDetailString);
+            return true;
+        }
+        return null;
     }
 }
 
@@ -132,7 +132,6 @@ function displayProductDetails() {
 
     //Attach click event handler to update button
     $("#update").click(function () {
-        $("#save").show();
         let index = $(this).attr('data-index'); // Retrieve the index from the button's data attribute
         console.log('Index passed to outside button action:', index);
         let row = $('#tabledata tr').eq(index);
@@ -144,38 +143,38 @@ function displayProductDetails() {
         // Parse new age as a number
         newProductPrice = parseInt(newProductPrice);
 
-        if (validateProductName(newProductName)) {
-            if (validateProductPrice(newProductPrice)) {
-                if (validateProductBrand(newProductBrand)) {
-                    // Update row data
-                    row.find('td:eq(0)').text(newProductName);
-                    row.find('td:eq(1)').text(newProductPrice);
-                    row.find('td:eq(2)').text(newProductBrand);
+        if (validateProduct(newProductName, newProductPrice, newProductBrand)) {
+            // Update row data
+            row.find('td:eq(0)').text(newProductName);
+            row.find('td:eq(1)').text(newProductPrice);
+            row.find('td:eq(2)').text(newProductBrand);
 
 
 
 
-                    // Retrieve existing data from local storage
-                    let productDetails = JSON.parse(localStorage.getItem('productDetails')) || [];
+            // Retrieve existing data from local storage
+            let productDetails = JSON.parse(localStorage.getItem('productDetails')) || [];
 
-                    // Update existing data
-                    productDetails[index] = { name: newProductName, price: newProductPrice, brand: newProductBrand };
-
-                    // Update local storage
-                    localStorage.setItem('productDetails', JSON.stringify(productDetails));
-                    location.reload();
-                } else {
-                    alert("please enter productbrand");
+            let isAlreadyExist = false;
+            for (let productInfo of productArray) {
+                if (productInfo.name == newProductName && productInfo.brand == newProductBrand) {
+                    isAlreadyExist = true;
                 }
+
             }
+            if (!isAlreadyExist) {
+                productDetails[index] = { name: newProductName, price: newProductPrice, brand: newProductBrand };
+                localStorage.setItem('productDetails', JSON.stringify(productDetails));
+                location.reload();
+            } else {
+                showToast("Product already exist");
+            }
+        }
+
             else {
-                alert("please enter productprice");
+                showToast("Please fill all the details");
             }
-        }
-        else {
-            alert("please enter productname");
-        }
-    });
+        });
 
     // Attach click event handler to delete buttons
     $(".delete-btn").click(function () {
@@ -205,9 +204,9 @@ function deleteDetails(index) {
 function showToast(message) {
     let toast = $("<div class='toast'></div>").text(message);
     $("body").append(toast);
-    toast.fadeIn(300).delay(2000).fadeOut(300, function(){
-      $(this).remove();
+    toast.fadeIn(300).delay(2000).fadeOut(300, function () {
+        $(this).remove();
     });
-  }
-  
+}
+
 

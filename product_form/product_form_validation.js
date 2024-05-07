@@ -1,5 +1,8 @@
 $(document).ready(function () {
     $(".add").click(function(){
+        $("#productname").val("");
+        $("#productprice").val("");
+        $("#productbrand").val("");
         $("#wrapper").show();
     });
     $(".close").click(function(){

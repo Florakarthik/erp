@@ -24,22 +24,6 @@ function validateFullName(fullname) {
   return (/^[a-zA-Z]+$/.test(fullname));
 }
 
-
-
-function ageValidation(age) {
-  // Convert age to a number
-  let ageNumber = parseInt(age);
-
-  // Check if ageNumber is a valid number
-  if (isNaN(ageNumber)) {
-    return false; // Age is not a number
-  }
-  if (ageNumber > 18) {
-    return true;
-  }
-
-}
-
 function validateProduct(name, price, brand) {
   // Convert price to a number
   let productPrice = parseInt(price);
