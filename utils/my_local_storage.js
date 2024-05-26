@@ -172,10 +172,10 @@ function displayProductDetails() {
             }
         }
 
-            else {
-                showToast("Please fill all the details");
-            }
-        });
+        else {
+            showToast("Please fill all the details");
+        }
+    });
 
     // Attach click event handler to delete buttons
     $(".delete-btn").click(function () {
@@ -202,6 +202,54 @@ function deleteDetails(index) {
     }
 }
 
+function emailVerification(email) {
+    let userArray = [];
+    let storedUserDetailsString = localStorage.getItem('userDetails');
+    if (storedUserDetailsString == null) {
+        return null;
+    }
+    else {
+        userArray = JSON.parse(storedUserDetailsString);
+        for (let userInfo of userArray) {
+            if (userInfo.email == email) {
+                console.log("inside if");
+                console.log(userInfo.email);
+                console.log(email);
+                return true;
+
+            }
+
+        }
+        console.log("outside if");
+        return false;
+    }
+}
+
+
+function forgotPassword(email, password) {
+    let isAlreadyExist = emailVerification(email); // Get the result from emailVerification
+    console.log(isAlreadyExist);
+    if (isAlreadyExist == true) { // Check if emailVerification returns true
+        // Retrieve user details from local storage
+        let userArray = JSON.parse(localStorage.getItem('userDetails'));
+
+        // Find the index of the email ID in the userData array
+        let userIndex = userArray.findIndex(function (user) {
+            return user.email == email;
+        });
+
+        // Update the password for the user at the found index
+        userArray[userIndex].password = password;
+
+        // Save the updated userData back to local storage
+        localStorage.setItem('userDetails', JSON.stringify(userArray));
+        console.log("Password updated successfully!");
+        // Optionally, you can clear the form fields or show a success message
+    } else {
+        console.error("Email not found in local storage.");
+    }
+
+}
 function showToast(message) {
     let toast = $("<div class='toast'></div>").text(message);
     $("body").append(toast);
@@ -209,5 +257,3 @@ function showToast(message) {
         $(this).remove();
     });
 }
-
-
