@@ -20,7 +20,7 @@ function saveUserDetails(user) {
         localStorage.setItem('userDetails', userDetailsString);
         return true;
     }
-}
+} 
 
 function getUserDetails(user) {
     //localStorage.clear();
@@ -112,11 +112,13 @@ function displayProductDetails() {
         $("#update").show();
         // Get the parent <tr> element of the clicked edit 
         let row = $(this).closest("tr");
-
+        console.log(row);
         let productname = row.find('td:eq(0)').text(); // Get name from first column
         console.log(productname);
         let productprice = row.find('td:eq(1)').text(); // Get age from second colum
+        console.log(productprice);
         let productbrand = row.find('td:eq(2)').text(); // Get email from third colum
+        console.log(productbrand);
 
 
         // Prompt for new name and age
@@ -126,6 +128,7 @@ function displayProductDetails() {
 
         // Get index of edited row
         let index = row.index();
+        console.log(index);
 
         $("#update").attr('data-index', index);
     });
@@ -138,8 +141,12 @@ function displayProductDetails() {
         console.log(row);
 
         let newProductName = $("#productname").val();
+        console.log(newProductName);
         let newProductPrice = $("#productprice").val();
+        console.log(newProductPrice);
         let newProductBrand = $("#productbrand").val();
+        console.log(newProductBrand);
+
         // Parse new age as a number
         newProductPrice = parseInt(newProductPrice);
 
@@ -155,22 +162,13 @@ function displayProductDetails() {
             // Retrieve existing data from local storage
             let productDetails = JSON.parse(localStorage.getItem('productDetails')) || [];
 
-            let isAlreadyExist = false;
-            for (let productInfo of productDetails) {
-                if (productInfo.name == newProductName && productInfo.brand == newProductBrand) {
-                    isAlreadyExist = true;
-                }
-
+            // Update existing data
+            productDetails[index] = { name: newProductName, price: newProductPrice, brand: newProductBrand };
+            console.log(productDetails[index]);
+            // Update local storage
+            localStorage.setItem('productDetails', JSON.stringify(productDetails));
+             location.reload();
             }
-            if (!isAlreadyExist) {
-                productDetails[index] = { name: newProductName, price: newProductPrice, brand: newProductBrand };
-                localStorage.setItem('productDetails', JSON.stringify(productDetails));
-                location.reload();
-            } else {
-                showToast("Product already exist");
-                $("#wrapper").hide();
-            }
-        }
 
         else {
             showToast("Please fill all the details");
